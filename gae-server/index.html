@@ -1,0 +1,43 @@
+<html>
+  <head>
+	<link rel="styleseet" type="text/css" href="/static/{{application}}.css" ></link>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor={{sensor}}"></script>
+	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+	<script type="application/x-javascript" src="/static/{{application}}.js" ></script>
+	<title>{{ project }}</title>
+	<script type="text/javascript" charset="utf-8">
+	   var positions= {{positions}};
+	   
+	   google.load("jquery","1.4.0");
+	   google.load("mootools", "1.2.4");
+	   google.setOnLoadCallback(function() {
+	       $(document).ready(function() {
+	           initialize();
+	           if (navigator.geolocation) {
+	               $("#webclient").css("display","inline");
+	           }
+	       })
+	   });
+	   function send_location (position) {
+           var buddy = $("#nick").val();
+           var position = JSON.encode({latitude: position.coords.latitude, longitude:position.coords.longitude});
+	       alert(buddy,position);
+           $.post("/",{buddy:buddy,position:position}, function(data) { alert("Success "+ data);});
+           
+	   }
+	</script>
+</head>
+<body onload="initialize();">
+<h1>Welcome to {{ project }}</h1>
+<a href="/static/client.zip">Lataa client</a>
+Version: {{ version }}
+<span id="webclient" style="display: none;"> <label for="nick">Nick</label><input type="text" name="nick" value="" id="nick"> <input type="button" name="submit" value="Send location" onclick="navigator.geolocation.getCurrentPosition(send_location);" id="submit">
+<span>
+<div id="map_canvas" style="width:100%; height:100%"></div>
+<div id="send_message"></div>
+<div id="settings"></div>
+<address>
+{{copyright}}
+</address>
+</body>
+</html>
