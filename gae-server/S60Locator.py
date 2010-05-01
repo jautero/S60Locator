@@ -19,11 +19,11 @@
 # limitations under the License.
 #
 
-project="Skiing Buddy Finder"
+project="Mobile Locator"
 version="1.0"
 author="Juha Autero <jautero@iki.fi>"
 copyright="Copyright 2009, 2010 Pasi Takala, Jussi Kallio, Juha Autero"
-application="skiing-buddy-finder"
+application="mobilelocator"
 import wsgiref.handlers
 import os
 
